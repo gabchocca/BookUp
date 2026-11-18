@@ -1,0 +1,28 @@
+:host {
+  display: block;
+  width: 100%;
+}
+footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 10px 20px;
+  border-top: 4px solid #473058;
+}
+.section-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 0;
+}
+
+.section-list li {
+  list-style: none;
+  text-align: center;
+}
+
+.section-list li a {
+  text-decoration: none;
+  font-family: 'Itim', cursive;
+  color: #000;
+}

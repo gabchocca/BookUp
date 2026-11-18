@@ -1,0 +1,67 @@
+:host{
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+h1 {
+  font-family: "Jim Nightshade", cursive;
+  font-weight: 500;
+  font-style: normal;
+  width: 100%;
+  padding: 2rem 10rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  background-color: #403D88;
+  color: #FBEFEF;
+}
+
+.section-home{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 20px;
+  width: 70%;
+}
+
+.div-message{
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.div-message p{
+  font-family: "Itim", cursive;
+  text-align: justify;
+}
+.div-button {
+  display: flex;
+  justify-content: center;
+  width: fit-content;
+}
+
+.div-button button {
+  display: flex;
+  align-items: center;
+  gap: 8px; /* Si tienes un ícono dentro del botón, esto los separa */
+  background-color: #FF6B6B;
+  color: #fff;
+  font-size: 1.2em;
+  font-family: "Itim", cursive;
+  border: none;
+  border-radius: 25px;
+  padding: 10px 20px;
+  cursor: pointer; /* Muestra la manito en toda el área roja */
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.div-button button:hover {
+  background-color: #e05252; /* Coral más oscuro al pasar el mouse */
+  transform: translateY(-2px); /* Pequeña elevación */
+  box-shadow: 0 4px 12px rgba(255, 107, 107, 0.4);
+}
+
+.div-button button:active {
+  transform: translateY(0); /* Baja al hacer clic */
+}

@@ -1,0 +1,77 @@
+
+:host {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  width: 100%;
+  margin-bottom: auto;
+}
+.submenu {
+    width: fit-content;
+    background-color: white;
+    font-family: "Itim", cursive;
+    font-weight: 400;
+    font-style: normal;
+    border-right: 4px solid #19192C;
+    margin-right: 20px;
+}
+
+.submenu-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0 1.5rem ;
+    list-style: none;
+}
+
+.submenu-item{
+    border-bottom: 1px solid #19192C;
+    padding: 20px 0;
+}
+
+.submenu-link span {
+    font-family: inherit;
+    font-size: 1.2em;
+}
+
+.submenu-link {
+    text-decoration: none;
+    color: #111;
+    display: block;
+    padding: 8px 10px;
+}
+
+.submenu-link.active {
+    background-color: #4E3BFF;
+    color: #fff;
+    border-bottom: 3px solid #E95A5A;
+    border-top: 3px solid #E95A5A;
+    border-radius: 15px;
+}
+
+.submenu-link:hover {
+    color: #4E3BFF;
+    background-color: #fff;
+}
+
+
+.my-books{
+  display: flex;
+}
+@media (max-width: 768px) {
+  .submenu {
+    width: 100%;
+    padding: 0.8rem;
+    border-left: none;
+    border-right: none;
+    border-top: 3px dashed #19192C;
+    border-bottom: 3px dashed #19192C;
+  }
+
+  .submenu-list {
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap: wrap;
+  }
+}

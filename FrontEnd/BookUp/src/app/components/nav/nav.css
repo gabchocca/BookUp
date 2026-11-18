@@ -1,0 +1,100 @@
+
+:host {
+  display: block;
+  width: 100%;
+}
+.navbar {
+
+    box-sizing: border-box;
+    width: 100%;
+    background-color: white;
+    font-family: "Itim", cursive;
+    font-weight: 400;
+    font-style: normal;
+    padding: 0 1.5rem 0 1.5rem;
+    border-bottom: 2px dashed#19192C;
+    background: linear-gradient(
+      90deg,
+      rgba(255, 179, 186, 0.42) 0%,
+      rgba(255, 223, 186, 0.42) 20%,
+      rgba(255, 255, 186, 0.42) 40%,
+      rgba(186, 255, 201, 0.42) 60%,
+      rgba(186, 225, 255, 0.42) 80%,
+      rgba(224, 187, 228, 0.42) 100%
+    );
+}
+
+
+.navbar-list {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    list-style: none;
+    padding: 0;
+    margin: 0 ;
+}
+.navbar-link span {
+    font-family: inherit;
+    font-size: 1rem;
+}
+
+.navbar-brand span {
+    font-family: inherit;
+    font-size: 2rem;
+}
+
+.navbar-brand {
+    text-decoration: none;
+    color: black;
+}
+
+.navbar-logo {
+  text-decoration: none;
+  color: black;
+}
+
+.navbar-link {
+    text-decoration: none;
+    color: #111;
+    display: block;
+    padding: 8px 10px;
+}
+
+.navbar-link.active {
+    color: #4E3BFF;
+    border-bottom: 3px solid #4E3BFF;
+}
+
+.navbar-link:hover {
+    color: #4E3BFF;
+}
+
+@media (max-width: 600px) {
+  .navbar {
+    padding: 1rem;
+    border-bottom-width: 5px;
+    margin-bottom: 1rem;
+  }
+
+  .navbar-list {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem 1rem;
+  }
+
+  .navbar-brand {
+    width: 100%;
+    text-align: center;
+    margin-right: 0;
+    margin-bottom: 0.25rem;
+  }
+
+  .navbar-link {
+    padding: 6px 8px;
+  }
+
+  .navbar-link span {
+    font-size: 0.95rem;
+  }
+}

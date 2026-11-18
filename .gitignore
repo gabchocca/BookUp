@@ -1,0 +1,12 @@
+# tmeporal text editor files
+*.swp
+*.swo
+*~
+
+# environments variables
+.env
+.env.*
+
+# operating system files
+.DS_Store
+Thumbs.db
