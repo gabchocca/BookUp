@@ -70,7 +70,10 @@
               "buildTarget": "BookUp:build:development"
             }
           },
-          "defaultConfiguration": "development"
+          "defaultConfiguration": "development",
+          "options": {
+            "port": 5000
+          }
         },
         "test": {
           "builder": "@angular/build:unit-test"

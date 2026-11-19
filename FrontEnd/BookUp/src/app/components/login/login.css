@@ -1,4 +1,7 @@
 
+*, *::before, *::after {
+  box-sizing: border-box;
+}
 :host{
   width: 100%;
   display: flex;
@@ -132,4 +135,56 @@ form{
 .form-container > a:hover {
   color: #b81818;
   text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .form-container {
+    width: 100%;
+  }
+
+  .form-field.buttons {
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+}
+
+@media (max-width: 992px) {
+  .form-container {
+    width: 75%;
+  }
+}
+
+@media (max-width: 600px) {
+  .form-container {
+    width: 100%;
+    gap: 15px;
+    padding: 20px;
+  }
+
+  form {
+    margin-top: 1.2rem;
+    gap: 15px;
+  }
+
+  .form-field {
+    padding: 0.85rem;
+    gap: 12px;
+  }
+
+  .form-field label {
+    font-size: 1.05em;
+  }
+
+  .form-field.buttons {
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+  }
+
+  .form-field.buttons button[type="submit"],
+  .form-field.buttons button[type="button"] {
+    width: 100%;
+    font-size: 1.1em;
+    padding: 12px 20px;
+  }
 }
