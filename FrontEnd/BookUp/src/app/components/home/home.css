@@ -22,7 +22,10 @@ h1 {
   gap: 20px;
   width: 70%;
 }
-
+.section-home img {
+  max-width: 100%;
+  height: auto;
+}
 .div-message{
   display: flex;
   flex-direction: column;
@@ -64,4 +67,48 @@ h1 {
 
 .div-button button:active {
   transform: translateY(0); /* Baja al hacer clic */
+}
+
+@media (max-width: 992px) {
+  h1 {
+    padding: 1.5rem 3rem;
+    font-size: 2.2rem;
+  }
+
+  .section-home {
+    width: 85%;
+    gap: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  h1 {
+    padding: 1.5rem 1.5rem;
+    font-size: 1.9rem;
+    text-align: center;
+    margin-top: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .section-home {
+    flex-direction: column;
+    width: 90%;
+    gap: 20px;
+    align-items: center;
+  }
+
+
+  .section-home img {
+    max-width: 260px;
+  }
+
+  .div-message p {
+    text-align: left;
+  }
+
+  .div-button,
+  .div-button button {
+    width: 100%;
+    justify-content: center;
+  }
 }

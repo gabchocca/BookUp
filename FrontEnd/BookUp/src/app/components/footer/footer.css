@@ -1,11 +1,13 @@
 :host {
   display: block;
   width: 100%;
+  margin-top: auto;
 }
 footer {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  flex-wrap: wrap;
   padding: 10px 20px;
   border-top: 4px solid #473058;
 }
@@ -25,4 +27,18 @@ footer {
   text-decoration: none;
   font-family: 'Itim', cursive;
   color: #000;
+}
+@media (max-width: 600px) {
+  footer {
+    flex-direction: column; /* Apila las columnas del footer una debajo de otra */
+    justify-content: center;
+    text-align: center;
+    padding: 20px 15px;
+    gap: 20px;
+  }
+
+  .section-list {
+    width: 100%;
+    align-items: center;
+  }
 }

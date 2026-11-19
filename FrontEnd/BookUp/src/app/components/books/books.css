@@ -1,4 +1,31 @@
 
 :host{
   margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+button{
+  font-size: 1.2em;
+  border-radius: 25px;
+  color: #fff;
+  background-color: #FF6B6B;
+  padding: 15px 30px;
+  border: none;
+  font-family: "Itim", cursive;
+}
+
+button:hover {
+  background-color: #aa6B6B;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(37, 98, 250, 0.3);
+}
+
+
+button:active {
+  transform: translateY(0);
 }
