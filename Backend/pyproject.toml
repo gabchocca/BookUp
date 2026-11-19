@@ -9,6 +9,9 @@ authors = [
 requires-python = ">=3.13"
 dependencies = [
     "fastapi>=0.162.0",
+    "psycopg[binary]>=3.3.9",
+    "pymupdf>=2.1",
+    "uvicorn>=0.54.0",
 ]
 
 [project.scripts]

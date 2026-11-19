@@ -6,6 +6,7 @@
 # environments variables
 .env
 .env.*
+!.env.example
 
 # operating system files
 .DS_Store
