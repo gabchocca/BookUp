@@ -41,7 +41,7 @@ Requiere tener instalado **Python 3.12+**, **`uv`** y **PostgreSQL**.
    ```bash
    cd backend
    uv sync
-   uv run uvicorn src.main:app
+   uv run uvicorn backend.main:app --port 8000
    ```
 
 ### Verificar funcionamiento
