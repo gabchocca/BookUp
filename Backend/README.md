@@ -1,13 +1,17 @@
 ## Instalación y ejecución del Backend
 
-### 1. Configurar variables de entorno
-Copia el archivo de ejemplo dentro de `backend/` y completa tus credenciales:
-
+### 1. Clonar el repositorio
 ```bash
-cp backend/.env.example backend/.env
+git clone https://github.com
+cd tu-repositorio
 ```
 
 ---
+### 2. Clave secreta ()
+Genera (`SECRET_KEY`) para firmar los tokens JWT y usala en .env posteriormente:
+```bash
+python -c "import secrets; print(secrets.token_hex(32))"
+```
 
 ### Opción A: Con Docker (Recomendado)
 Requiere tener instalado **Docker** y **Docker Compose**.
@@ -25,19 +29,20 @@ Requiere tener instalado **Docker** y **Docker Compose**.
 ### Opción B: Ejecución local (Sin Docker)
 Requiere tener instalado **Python 3.12+**, **`uv`** y **PostgreSQL**.
 
-1. Crea una base de datos en PostgreSQL (ej. `biblioteca_db`) y ejecuta el script `backend/db/init.sql` para crear las tablas.
-2. En `backend/.env`, asegúrate de que el host de `DATABASE_URL` sea `localhost`:
-   ```env
-   DATABASE_URL=postgresql://postgres:tu_password@localhost:5432/bookUp_db
-   ```
+1. Crea una base de datos en PostgreSQL (ej. `bookUp_db`) y ejecuta el script `backend/db/init.sql` para crear las tablas.
+
+2. Crea tu archivo `.env` copiando la plantilla de ejemplo y configuralo:
+
+* **En Windows (PowerShell):**
+  ```powershell
+  copy .env.example .env
+  ```
 3. Instala las dependencias y arranca el servidor desde `backend/`:
    ```bash
    cd backend
    uv sync
-   uv run uvicorn src.main:app --reload
+   uv run uvicorn src.main:app
    ```
-
----
 
 ### Verificar funcionamiento
 Una vez iniciado, abre en tu navegador:
