@@ -1,4 +1,4 @@
-import { Component, inject, signal, viewChild, ElementRef } from '@angular/core';
+import { Component, inject, signal} from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { Auth } from '../../services/auth';
 import { LoginInterface } from '../../interfaces/login-interface';
@@ -15,56 +15,65 @@ export class Login {
   private authService = inject(Auth);
   private router = inject(Router);
 
-
-  private errorDialog = viewChild<ElementRef<HTMLDialogElement>>('errorDialog');
-  // modelo del formulario
+  // Modelo del formulario
   private loginModel = signal<LoginInterface>({
     identifier: '',
     password: ''
   });
 
-  // formulario signal
+  // Formulario signal
   loginForm = form(this.loginModel, (schema) => {
     required(schema.identifier, { message: 'El usuario o correo es obligatorio' });
     required(schema.password, { message: 'La contraseña es obligatoria' });
   });
 
-  //Control de la pantalla
+  // Control de la pantalla
   errorMessage = signal('');
   isLoading = signal(false);
+  showErrorModal = signal(false);
 
-onSubmit(event: Event): void {
-  event.preventDefault();
-  console.log('1. Clic en Enviar detectado');
-  console.log('2. Contenido de loginModel:', this.loginModel());
-  console.log('3. ¿Formulario inválido?:', this.loginForm().invalid());
+  onSubmit(event: Event): void {
+    event.preventDefault();
 
-  // Quitamos el if temporalmente para forzar que salga a Network
-  this.isLoading.set(true);
-  this.errorMessage.set('');
-
-  const { identifier, password } = this.loginModel();
-
-  this.authService.login(identifier, password).subscribe({
-    next: () => {
-      this.isLoading.set(false);
-      this.router.navigate(['/']);
-    },
-    error: (err) => {
-      console.log('4. Respuesta de error de FastAPI:', err);
-      this.isLoading.set(false);
-      this.errorMessage.set(err.error?.detail || 'Error al conectar con el servidor');
-      this.errorDialog()?.nativeElement.showModal();
+    if (this.loginForm().invalid()) {
+      return;
     }
-  });
-}
 
-cerrarPopup(): void {
-    this.errorDialog()?.nativeElement.close();
+    this.isLoading.set(true);
+    this.errorMessage.set('');
+
+    const { identifier, password } = this.loginModel();
+
+    this.authService.login(identifier, password).subscribe({
+      next: () => {
+        this.isLoading.set(false);
+        this.router.navigate(['/']);
+      },
+      error: (err) => {
+        this.isLoading.set(false);
+        this.errorMessage.set(err.error?.detail || 'Error al conectar con el servidor');
+        this.showErrorModal.set(true);
+      }
+    });
+  }
+
+  cerrarPopup(): void {
+    this.showErrorModal.set(false);
+  }
+
+  getErrorMessage(field: any): string | null {
+  const state = field();
+  if (state.dirty() && state.invalid()) {
+    const errors = state.errors();
+    return Array.isArray(errors) ? errors[0]?.message : errors?.message;
+  }
+  return null;
   }
 
   onCancel(): void {
     this.loginModel.set({ identifier: '', password: '' });
     this.errorMessage.set('');
   }
+
+  
 }

@@ -84,12 +84,12 @@
 
   .my-books {
     flex-direction: column;
-    align-items: stretch; /* Evita que los hijos colapsen en ancho al pasar a columna */
+    align-items: stretch; 
     width: 100%;
   }
 
   .my-books > *:not(.submenu) {
-    flex: none; /* Evita que el contenedor del formulario colapse en altura a 0px */
+    flex: none; 
     width: 100%;
   }
 }

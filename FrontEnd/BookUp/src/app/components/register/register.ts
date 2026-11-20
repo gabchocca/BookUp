@@ -1,4 +1,4 @@
-import { Component, ElementRef, inject, signal, viewChild } from '@angular/core';
+import { Component, inject, signal,} from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { form, FormField, required, email, minLength } from '@angular/forms/signals';
 import { Auth, } from '../../services/auth';
@@ -6,17 +6,15 @@ import { RegisterRequest } from '../../interfaces/register-request';
 
 @Component({
   selector: 'app-register',
-  imports: [FormField],
+  imports: [FormField, RouterLink],
   templateUrl: './register.html',
   styleUrl: './register.css',
 })
 export class Register {
-  private authService = inject(Auth);
+   private authService = inject(Auth);
   private router = inject(Router);
 
-  private errorDialog = viewChild<ElementRef<HTMLDialogElement>>('errorDialog');
-
-  // Modelo del formulario con los 4 campos
+  // Modelo
   private registerModel = signal<RegisterRequest>({
     username: '',
     email: '',
@@ -37,6 +35,7 @@ export class Register {
   // Control de la pantalla
   errorMessage = signal('');
   isLoading = signal(false);
+  showErrorModal = signal(false);
 
   onSubmit(event: Event): void {
     event.preventDefault();
@@ -48,22 +47,31 @@ export class Register {
     this.isLoading.set(true);
     this.errorMessage.set('');
 
-    // Envía { username, email, password, name } al backend
     this.authService.register(this.registerModel()).subscribe({
       next: () => {
         this.isLoading.set(false);
-        this.router.navigate(['../login']);
+        this.router.navigate(['/login-register/login']);
       },
       error: (err) => {
         this.isLoading.set(false);
         this.errorMessage.set(err.error?.detail || 'Error al conectar con el servidor');
-        this.errorDialog()?.nativeElement.showModal();
+        this.showErrorModal.set(true);
       }
     });
   }
 
   cerrarPopup(): void {
-    this.errorDialog()?.nativeElement.close();
+    this.showErrorModal.set(false);
+  }
+  
+  getErrorMessage(field: any): string | null {
+  const state = field();
+  if (state.dirty() && state.invalid()) {
+    const errors = state.errors();
+
+    return Array.isArray(errors) ? errors[0]?.message : errors?.message;
+  }
+  return null;
   }
 
   onCancel(): void {

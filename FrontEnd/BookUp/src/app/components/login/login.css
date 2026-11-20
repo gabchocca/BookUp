@@ -1,8 +1,8 @@
-
 *, *::before, *::after {
   box-sizing: border-box;
 }
-:host{
+
+:host {
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -10,7 +10,7 @@
   justify-content: center;
 }
 
-.form-container{
+.form-container {
   width: 50%;
   display: flex;
   flex-direction: column;
@@ -19,7 +19,7 @@
   gap: 20px;
 }
 
-form{
+form {
   display: flex;
   width: 100%;
   flex-direction: column;
@@ -29,7 +29,7 @@ form{
   margin-top: 2rem;
 }
 
-.form-field{
+.form-field {
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -39,33 +39,33 @@ form{
   border-radius: 15px;
 }
 
-.form-field:focus-within{
+.form-field:focus-within {
   border: 1px solid #000;
-  box-shadow: 0 0 0 1px #000
+  box-shadow: 0 0 0 1px #000;
 }
 
-.form-field label{
+.form-field label {
   font-size: 1.2em;
   font-family: "Itim", cursive;
   border-bottom: 1px solid #929292;
 }
 
-.form-field input{
+.form-field input {
   border-top: 0;
   border-right: 0;
   border-left: 0;
-  border-bottom: 2px solid #E95A5A ;
+  border-bottom: 2px solid #E95A5A;
   font-family: "Itim", cursive;
   font-size: 1em;
   padding: 5px;
 }
 
-.form-field input:focus{
+.form-field input:focus {
   outline: none;
-  border-bottom: 2px solid #E95A5A ;
+  border-bottom: 2px solid #E95A5A;
 }
 
-.form-field.buttons{
+.form-field.buttons {
   display: flex;
   flex-direction: row;
   gap: 30px;
@@ -79,43 +79,41 @@ form{
   box-shadow: none;
 }
 
-.form-field.buttons button[type = "submit"]{
-  font-size: 1.2em;
-  border-radius: 25px;
-  color: #fff;
-  background-color: #2562FA;
-  padding: 15px 30px;
-  border: none;
-  font-family: "Itim", cursive;
-}
-.form-field.buttons button[type = "button"]{
-  font-size: 1.2em;
-  border-radius: 25px;
-  color: #fff;
-  background-color: #EE2929;
-  padding: 15px 20px;
-  border: none;
-  font-family: "Itim", cursive;
-}
-
 .form-field.buttons button {
   font-size: 1.2em;
   border-radius: 25px;
   color: #fff;
   border: none;
   font-family: "Itim", cursive;
-  cursor: pointer; /* Cambia el cursor a la manito */
+  cursor: pointer;
   transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.form-field.buttons button[type="submit"]:hover {
-  background-color: #1a4cd1; /* Azul más oscuro al pasar el mouse */
-  transform: translateY(-2px); /* Se eleva ligeramente */
+.form-field.buttons button[type="submit"] {
+  background-color: #2562FA;
+  padding: 15px 30px;
+}
+
+.form-field.buttons button[type="button"] {
+  background-color: #EE2929;
+  padding: 15px 20px;
+}
+
+.form-field.buttons button[type="submit"]:disabled {
+  background-color: #9bb5f7;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.form-field.buttons button[type="submit"]:not(:disabled):hover {
+  background-color: #1a4cd1;
+  transform: translateY(-2px);
   box-shadow: 0 4px 10px rgba(37, 98, 250, 0.3);
 }
 
 .form-field.buttons button[type="button"]:hover {
-  background-color: #c91e1e; /* Rojo más oscuro al pasar el mouse */
+  background-color: #c91e1e;
   transform: translateY(-2px);
   box-shadow: 0 4px 10px rgba(238, 41, 41, 0.3);
 }
@@ -123,8 +121,10 @@ form{
 .form-field.buttons button:active {
   transform: translateY(0);
 }
+
 .form-container > a {
   font-size: 1em;
+  font-family: "Itim", cursive;
   background-color: #fff;
   color: #EE2929;
   border: none;
@@ -138,34 +138,15 @@ form{
   text-decoration: underline;
 }
 
-.error-popup {
-  display: none;
+/* ==========================================================================
+   MEDIA QUERIES
+   ========================================================================== */
+@media (max-width: 992px) {
+  .form-container {
+    width: 75%;
+  }
 }
 
-.error-popup[open] {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  position: fixed;
-  inset: 0;
-  margin: auto;
-  width: min(90%, 380px);
-  height: fit-content;
-  border: none;
-  border-radius: 14px;
-  padding: 24px;
-  background-color: #ffffff;
-  color: #1f2937;
-  text-align: center;
-  box-shadow: 0 20px 35px rgba(0, 0, 0, 0.35);
-  z-index: 1000;
-}
-
-.error-popup::backdrop {
-  background: rgba(0, 0, 0, 0.55);
-  backdrop-filter: blur(3px);
-}
 @media (max-width: 768px) {
   .form-container {
     width: 100%;
@@ -174,12 +155,6 @@ form{
   .form-field.buttons {
     flex-wrap: wrap;
     gap: 15px;
-  }
-}
-
-@media (max-width: 992px) {
-  .form-container {
-    width: 75%;
   }
 }
 
@@ -217,4 +192,3 @@ form{
     padding: 12px 20px;
   }
 }
-
