@@ -32,7 +32,6 @@ Requiere tener instalado **Python 3.12+**, **`uv`** y **PostgreSQL**.
 1. Crea una base de datos en PostgreSQL (ej. `bookUp_db`) y ejecuta el script `backend/db/init.sql` para crear las tablas.
 
 2. Crea tu archivo `.env` copiando la plantilla de ejemplo y configuralo:
-
 * **En Windows (PowerShell):**
   ```powershell
   copy .env.example .env
@@ -42,11 +41,16 @@ Requiere tener instalado **Python 3.12+**, **`uv`** y **PostgreSQL**.
    ```powershell
   powershell -ExecutionPolicy Bypass -File .\setup.ps1
    ```
+   Sincronizacion y ejecucion backend:
    ```bash
    uv sync
    uv run uvicorn backend.main:app
    ```
-
+   Sincronizacion y ejecucion frontend:
+   ```bash
+   npm install
+   ng serve
+   ```
 ### Verificar funcionamiento
 Una vez iniciado, abre en tu navegador:
 * **Documentación interactiva (Swagger)**: `http://localhost:8000/docs`
