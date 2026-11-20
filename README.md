@@ -50,7 +50,7 @@ Requiere tener instalado **Python 3.12+** y **PostgreSQL**.
    En la raiz de Backend:
    ```bash
    uv sync
-   uv run uvicorn backend.main:app --reload
+   uv run uvicorn backend.main:app --proxy 8000
    ```
 
 5. **Sincronización y ejecución del Frontend:**
