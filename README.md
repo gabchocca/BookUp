@@ -39,7 +39,9 @@ Requiere tener instalado **Python 3.12+**, **`uv`** y **PostgreSQL**.
   ```
 3. Instala las dependencias y arranca el servidor desde `backend/`:
    ```bash
-   cd backend
+   powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
+   ```
+   ```bash
    uv sync
    uv run uvicorn src.main:app
    ```
