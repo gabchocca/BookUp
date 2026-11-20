@@ -1,6 +1,6 @@
 
 $UV_CMD               = "uv"
-$UV_INSTALL_URL       = "https://astral.sh"
+$UV_INSTALL_URL       = "https://astral.sh/uv/install.ps1"
 
 $FNM_CMD              = "fnm"
 $FNM_WINGET_ID        = "Schniz.fnm"
@@ -58,6 +58,8 @@ if (Get-Command $FNM_CMD -ErrorAction SilentlyContinue) {
 }
 
 Write-Host "`n--- 4. Verificando paquetes globales de npm ---" -ForegroundColor Cyan
+$env:NODE_OPTIONS = "--use-system-ca"
+
 if (-not (Get-Command $TSC_CMD -ErrorAction SilentlyContinue)) {
     Write-Host "Instalando $TSC_NPM_PKG..." -ForegroundColor Yellow
     Invoke-Expression $CMD_INSTALL_TSC
