@@ -39,13 +39,8 @@ Requiere tener instalado **Python 3.12+**, **`uv`** y **PostgreSQL**.
   ```
 3. Instala las dependencias y arranca el servidor desde `backend/`:
    instalacion de dependencias uv, angular, node, typscript.
-   ```bash
-   powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
-   winget install Schniz.fnm
-   fnm env --use-on-cd --shell powershell | Out-String | Invoke-Expression
-   fnm install --use 26
-   npm install -g typescript
-   npm install -g @angular/cli
+   ```powershell
+  powershell -ExecutionPolicy Bypass -File .\setup.ps1
    ```
    ```bash
    uv sync
