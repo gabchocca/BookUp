@@ -1,3 +1,5 @@
+CREATE DATABASE "bookUp_db";
+
 CREATE TABLE IF NOT EXISTS book (
     id SERIAL PRIMARY KEY,
     title TEXT,
