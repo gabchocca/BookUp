@@ -35,10 +35,9 @@ Requiere tener instalado **Python 3.12+** y **PostgreSQL**.
 
 1. **Base de datos:** Crea una base de datos en PostgreSQL llamada `"bookUp_db"` y ejecuta el script `Backend/db/init.sql` para crear las tablas.
 
-2. **Variables de entorno:** Entra a la carpeta `Backend/`, crea tu archivo `.env` copiando la plantilla de ejemplo y configúralo (asegúrate de usar `localhost` en lugar de `db` en tu `DATABASE_URL`):
+2. **Variables de entorno:** Configural .env, la secret key ya se genera con el siguiente script:
    ```powershell
-   cd Backend
-   copy .env.example .env
+   powershell -ExecutionPolicy Bypass -File .\setup-env.ps1
    ```
 
 3. **Instalación de herramientas (desde la raíz del proyecto):**
@@ -48,14 +47,14 @@ Requiere tener instalado **Python 3.12+** y **PostgreSQL**.
    ```
 
 4. **Sincronización y ejecución del Backend:**
-   Desde la carpeta `Backend/` (o la raíz según donde esté tu `pyproject.toml`):
+   En la raiz de Backend:
    ```bash
    uv sync
    uv run uvicorn backend.main:app --reload
    ```
 
 5. **Sincronización y ejecución del Frontend:**
-   Abre otra terminal, entra a la carpeta del frontend y arranca Angular:
+   En la raiz del FrontEnd:
    ```bash
    cd "FrontEnd/BookUp"
    npm install
