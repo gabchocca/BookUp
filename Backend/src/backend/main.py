@@ -13,10 +13,14 @@ from fastapi.responses import JSONResponse
 from fastapi.security import OAuth2PasswordBearer
 import jwt
 
+from dotenv import load_dotenv
+load_dotenv()
+
 app = FastAPI()
 
 #CORS configuration
 origins = [
+    "http://localhost:4200",
     "http://localhost:5000"
 ]
 
