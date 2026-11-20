@@ -1,18 +1,38 @@
 <div class="form-container">
-  <form>
+  <form (submit)="onSubmit($event)">
     <div class="form-field">
       <label for="usuario">Usuario o correo:</label>
-      <input type="text" id="usuario" name="usuario" value="" />
+      <input
+        type="text"
+        id="usuario"
+        [formField]="loginForm.identifier"
+      />
     </div>
+
     <div class="form-field">
       <label for="password">Contraseña:</label>
-      <input type="password" id="password" name="password" value="" />
+      <input
+        type="password"
+        id="password"
+        [formField]="loginForm.password"
+      />
     </div>
+
     <div class="form-field buttons">
-      <button type="submit">Enviar</button>
-      <button type="button">Cancelar</button>
+      <button type="submit" [disabled]="loginForm().invalid() || isLoading()">
+        {{ isLoading() ? 'Ingresando...' : 'Enviar' }}
+      </button>
+      <button type="button" (click)="onCancel()">Cancelar</button>
     </div>
   </form>
 
-  <a routerLink="../register" >¿Aun no te has registrado?</a>
+  <a routerLink="../register">¿Aun no te has registrado?</a>
 </div>
+
+<dialog #errorDialog class="error-popup">
+  <div class="popup-content">
+    <h3>⚠️ No se pudo iniciar sesión</h3>
+    <p>{{ errorMessage() }}</p>
+    <button type="button" (click)="cerrarPopup()">Entendido</button>
+  </div>
+</dialog>
