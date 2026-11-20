@@ -10,7 +10,7 @@ routerUser = APIRouter(prefix='/user', tags=['user'])
 
 service = UserService()
 
-@routerUser.post("/")
+@routerUser.post("/register")
 def register(user: User, conn = Depends(get_db)):
     
     return service.register_user(conn, user)

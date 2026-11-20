@@ -5,7 +5,8 @@ class User (BaseModel):
     username : str
     email : str
     password : str
-    isActive : bool
+    name : str
+    isActive : bool = True
 
 class LoginRequest(BaseModel):
     identifier: str

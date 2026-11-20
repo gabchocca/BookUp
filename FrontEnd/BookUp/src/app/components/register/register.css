@@ -1,23 +1,30 @@
-:host{
+:host {
+  display: block;
   width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
 }
 
-.form-container{
+.form-container {
   width: 50%;
+  margin: 2rem auto 0 auto; /* El 'auto' a los lados lo centra horizontalmente siempre */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 20px;
-  margin-top: 2rem;
 }
 
-.form-field{
+/* ESTA ES LA REGLA QUE FALTABA PARA QUE NO SE ACHIQUE EL ANCHO */
+.form-container form {
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.form-field {
+  width: 100%;
+  box-sizing: border-box; /* Evita que el padding desborde el 100% */
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -26,33 +33,35 @@
   border-radius: 15px;
 }
 
-.form-field:focus-within{
+.form-field:focus-within {
   border: 1px solid #000;
-  box-shadow: 0 0 0 1px #000
+  box-shadow: 0 0 0 1px #000;
 }
 
-.form-field label{
+.form-field label {
   font-size: 1.2em;
   font-family: "Itim", cursive;
   border-bottom: 1px solid #929292;
 }
 
-.form-field input{
+.form-field input {
+  width: 100%;
+  box-sizing: border-box;
   border-top: 0;
   border-right: 0;
   border-left: 0;
-  border-bottom: 2px solid #E95A5A ;
+  border-bottom: 2px solid #E95A5A;
   font-family: "Itim", cursive;
   font-size: 1em;
   padding: 5px;
 }
 
-.form-field input:focus{
+.form-field input:focus {
   outline: none;
-  border-bottom: 2px solid #E95A5A ;
+  border-bottom: 2px solid #E95A5A;
 }
 
-.form-field.buttons{
+.form-field.buttons {
   display: flex;
   flex-direction: row;
   gap: 30px;
@@ -61,13 +70,12 @@
   font-family: inherit;
 }
 
-
 .form-field.buttons:focus-within {
   border: none;
   box-shadow: none;
 }
 
-.form-field.buttons button[type = "submit"]{
+.form-field.buttons button[type="submit"] {
   font-size: 1.2em;
   border-radius: 25px;
   color: #fff;
@@ -76,7 +84,8 @@
   border: none;
   font-family: "Itim", cursive;
 }
-.form-field.buttons button[type = "button"]{
+
+.form-field.buttons button[type="button"] {
   font-size: 1.2em;
   border-radius: 25px;
   color: #fff;
@@ -92,18 +101,25 @@
   color: #fff;
   border: none;
   font-family: "Itim", cursive;
-  cursor: pointer; /* Cambia el cursor a la manito */
+  cursor: pointer;
   transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.form-field.buttons button[type="submit"]:hover {
-  background-color: #1a4cd1; /* Azul más oscuro al pasar el mouse */
-  transform: translateY(-2px); /* Se eleva ligeramente */
+.form-field.buttons button[type="submit"]:disabled {
+  background-color: #9bb5f7;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.form-field.buttons button[type="submit"]:not(:disabled):hover {
+  background-color: #1a4cd1;
+  transform: translateY(-2px);
   box-shadow: 0 4px 10px rgba(37, 98, 250, 0.3);
 }
 
 .form-field.buttons button[type="button"]:hover {
-  background-color: #c91e1e; /* Rojo más oscuro al pasar el mouse */
+  background-color: #c91e1e;
   transform: translateY(-2px);
   box-shadow: 0 4px 10px rgba(238, 41, 41, 0.3);
 }
@@ -112,9 +128,80 @@
   transform: translateY(0);
 }
 
+.form-container > a {
+  font-family: "Itim", cursive;
+  color: #333;
+  text-decoration: none;
+}
+
 .form-container > a:hover {
   color: #b81818;
   text-decoration: underline;
+}
+
+.error-popup {
+  position: fixed;
+  inset: 0;
+  margin: auto;
+  width: 90%;
+  max-width: 400px;
+  box-sizing: border-box;
+  background-color: #fff;
+  border: 1px dashed #929292;
+  border-radius: 15px;
+  padding: 1.5rem;
+  font-family: "Itim", cursive;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+}
+
+.error-popup::backdrop {
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(2px);
+}
+
+.popup-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  text-align: center;
+}
+
+.popup-content h3 {
+  width: 100%;
+  margin: 0;
+  padding-bottom: 10px;
+  font-size: 1.3em;
+  color: #000;
+  border-bottom: 2px solid #E95A5A;
+}
+
+.popup-content p {
+  margin: 5px 0;
+  font-size: 1.05em;
+  color: #333;
+}
+
+.popup-content button {
+  background-color: #EE2929;
+  color: #fff;
+  border: none;
+  border-radius: 25px;
+  padding: 12px 30px;
+  font-family: "Itim", cursive;
+  font-size: 1.1em;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.popup-content button:hover {
+  background-color: #c91e1e;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(238, 41, 41, 0.3);
+}
+
+.popup-content button:active {
+  transform: translateY(0);
 }
 
 @media (max-width: 992px) {
@@ -126,12 +213,13 @@
 @media (max-width: 600px) {
   .form-container {
     width: 100%;
+    box-sizing: border-box;
     margin-top: 1.2rem;
     gap: 15px;
     padding: 20px;
   }
 
-  form {
+  .form-container form {
     gap: 15px;
   }
 

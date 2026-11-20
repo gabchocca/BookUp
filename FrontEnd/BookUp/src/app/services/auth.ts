@@ -2,17 +2,8 @@ import { Injectable, inject, signal, PLATFORM_ID } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, tap, shareReplay } from 'rxjs';
 import { isPlatformBrowser } from '@angular/common';
-
-export interface LoginResponse {
-  idToken: string;
-  expiresIn: number;
-}
-
-export interface RegisterRequest {
-  username: string;
-  email: string;
-  password: string;
-}
+import { LoginResponse } from '../interfaces/login-response';
+import { RegisterRequest } from '../interfaces/register-request';
 
 @Injectable({
   providedIn: 'root'
@@ -27,7 +18,7 @@ private platformId = inject(PLATFORM_ID);
   isAuthenticated = signal<boolean>(this.hasValidToken());
 
   register(data: RegisterRequest): Observable<unknown> {
-    return this.http.post(`${this.apiUrl}/`, data);
+    return this.http.post(`${this.apiUrl}/register`, data);
   }
 
   login(identifier: string, password: string): Observable<LoginResponse> {
@@ -54,7 +45,7 @@ private setSession(authResult: LoginResponse): void {
     this.isAuthenticated.set(false);
   }
 private hasValidToken(): boolean {
-    // 2. Si está ejecutándose en el servidor SSR, devuelve false sin tocar localStorage
+    // 
     if (!isPlatformBrowser(this.platformId)) {
       return false;
     }

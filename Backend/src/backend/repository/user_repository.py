@@ -7,8 +7,8 @@ class UserRepository:
         with conn.transaction():
             with conn.cursor(row_factory=dict_row) as cur:
                 cur.execute(
-                    "INSERT INTO users (username, email, password) VALUES (%s, %s, %s) RETURNING id, email",
-                    (user.username, user.email, user.password)
+                    "INSERT INTO users (username, email, password, name) VALUES (%s, %s, %s, %s) RETURNING id, email",
+                    (user.username, user.email, user.password, user.name)
                 )
                 result = cur.fetchone()
                 return result
