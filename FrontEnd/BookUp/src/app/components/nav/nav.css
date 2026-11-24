@@ -71,6 +71,29 @@
     color: #4E3BFF;
 }
 
+.btn-logout {
+  font-family: "Itim", cursive;
+  font-size: 1rem;
+  color: #19192C;
+  background-color: rgba(255, 179, 186, 0.75);
+  border: 2px dashed #19192C;
+  border-radius: 12px;
+  padding: 6px 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-logout:hover {
+  background-color: #ff6b7a;
+  color: white;
+  border-style: solid;
+  transform: translateY(-2px);
+}
+
+.btn-logout:active {
+  transform: translateY(0);
+}
+
 @media (max-width: 600px) {
   .navbar {
     padding: 1rem;
@@ -96,6 +119,11 @@
   }
 
   .navbar-link span {
+    font-size: 0.95rem;
+  }
+
+  .btn-logout {
+    padding: 5px 12px;
     font-size: 0.95rem;
   }
 }

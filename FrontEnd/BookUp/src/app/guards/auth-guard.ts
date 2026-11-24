@@ -1,20 +1,30 @@
 import { CanActivateFn, Router } from '@angular/router';
+import { inject} from '@angular/core';
 import { Auth } from '../services/auth';
+import { PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
-import { inject, PLATFORM_ID } from '@angular/core';
+import Swal from 'sweetalert2';
 
-export const authGuard: CanActivateFn = (route, state) => {
+export const authGuard: CanActivateFn = async () => {
+  const authService = inject(Auth);
   const router = inject(Router);
   const platformId = inject(PLATFORM_ID);
 
-  if (isPlatformBrowser(platformId)) {
-    const idToken = localStorage.getItem('id_token');
-
-    if (idToken) {
-      return true; 
-    }
+  if (authService.hasValidToken()) {
+    return true;
   }
 
-  // No tiene token -> Redirige automáticamente al login
+  //Pop Up de SweetAlert
+  if (isPlatformBrowser(platformId)) {
+    await Swal.fire({
+      icon: 'warning',
+      title: 'Acceso restringido',
+      text: 'Tienes que iniciar sesión primero para entrar aquí.',
+      confirmButtonText: 'Ir al login',
+      allowOutsideClick: false,
+    });
+  }
+
+  //redirect to login
   return router.createUrlTree(['/login-register/login']);
 };

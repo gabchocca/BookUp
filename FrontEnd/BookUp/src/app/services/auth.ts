@@ -44,8 +44,8 @@ private setSession(authResult: LoginResponse): void {
     }
     this.isAuthenticated.set(false);
   }
-private hasValidToken(): boolean {
-    // 
+public hasValidToken(): boolean {
+    //
     if (!isPlatformBrowser(this.platformId)) {
       return false;
     }

@@ -47,7 +47,7 @@ export class Login {
     this.authService.login(identifier, password).subscribe({
       next: () => {
         this.isLoading.set(false);
-        this.router.navigate(['/']);
+        this.router.navigate(['/myBooks']);
       },
       error: (err) => {
         this.isLoading.set(false);
@@ -75,5 +75,5 @@ export class Login {
     this.errorMessage.set('');
   }
 
-  
+
 }

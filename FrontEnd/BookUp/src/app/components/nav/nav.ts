@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { Component, inject} from '@angular/core';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { Auth } from '../../services/auth';
 
 @Component({
   selector: 'app-nav',
@@ -7,4 +8,13 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
   templateUrl: './nav.html',
   styleUrl: './nav.css',
 })
-export class Nav {}
+export class Nav {
+  authService = inject(Auth);
+  private router = inject(Router);
+
+  logOut(): void {
+    this.authService.logout();
+    this.router.navigate(['/']);
+  }
+
+}

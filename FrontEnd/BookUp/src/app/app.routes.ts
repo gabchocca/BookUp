@@ -8,6 +8,7 @@ import { UploadBook } from './components/upload-book/upload-book';
 import { LoginRegister } from './components/login-register/login-register';
 import { Register } from './components/register/register';
 import { authGuard } from './guards/auth-guard';
+import { authChildGuard } from './guards/auth-child-guard';
 
 export const routes: Routes = [
   { path: "home", component: Home },
@@ -24,6 +25,7 @@ export const routes: Routes = [
     path: "myBooks",
     component: MyBooks,
     canActivate: [authGuard],
+    canActivateChild: [authChildGuard],
     children: [
       { path: "books", component: Books },
       { path: "categories", component: Categories },

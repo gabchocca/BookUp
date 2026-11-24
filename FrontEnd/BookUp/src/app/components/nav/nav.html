@@ -1,29 +1,60 @@
 <nav class="navbar">
+  @if (!authService.isAuthenticated()) {
     <ul class="navbar-list">
+      <li class="navbar-link navbar-brand">
+        <a routerLink="/" class="navbar-logo">
+          <span>BookUp</span>
+        </a>
+      </li>
 
-        <li class="navbar-link navbar-brand">
-            <a routerLink="/" class="navbar-logo">
-                <span>BookUp</span>
-            </a>
-        </li>
+      <li class="navbar-item">
+        <a
+          routerLink="/home"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+          class="navbar-link"
+        >
+          <span>Inicio</span>
+        </a>
+      </li>
 
-        <li class="navbar-item">
-            <a routerLink="/home" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="navbar-link">
-                <span>Inicio</span>
-            </a>
-        </li>
+      <li class="navbar-item">
+        <a routerLink="/login-register" routerLinkActive="active" class="navbar-link">
+          <span>Iniciar Sesion</span>
+        </a>
+      </li>
 
-        <li class="navbar-item">
-            <a routerLink="/login-register" routerLinkActive="active" class="navbar-link">
-                <span>Iniciar Sesion</span>
-            </a>
-        </li>
-
-        <li class="navbar-item">
-            <a routerLink="/myBooks" routerLinkActive="active" class="navbar-link">
-                <span>Mis libros</span>
-            </a>
-        </li>
-
+      <li class="navbar-item">
+        <a routerLink="/myBooks" routerLinkActive="active" class="navbar-link">
+          <span>Mis libros</span>
+        </a>
+      </li>
     </ul>
+  } @else {
+    <ul class="navbar-list">
+      <li class="navbar-link navbar-brand">
+        <a routerLink="/" class="navbar-logo">
+          <span>BookUp</span>
+        </a>
+      </li>
+
+      <li class="navbar-item">
+        <a
+          routerLink="/home"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+          class="navbar-link"
+        >
+          <span>Inicio</span>
+        </a>
+      </li>
+
+      <li class="navbar-item">
+        <a routerLink="/myBooks" routerLinkActive="active" class="navbar-link">
+          <span>Mis libros</span>
+        </a>
+      </li>
+      <button type="button" class="btn-logout" (click)="logOut()">Cerrar sesión</button>
+    </ul>
+  }
 </nav>

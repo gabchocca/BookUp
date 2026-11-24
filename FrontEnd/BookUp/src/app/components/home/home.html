@@ -13,8 +13,8 @@
         archivos, lecturas digitales en general.
       </p>
       <div class="div-button">
-        <button type="submit" routerLink="/login-register">
-          <span>Ingresar</span>
+        <button type="submit" [routerLink]="authService.isAuthenticated() ? '/myBooks' : '/login-register'">
+          <span>{{ authService.isAuthenticated() ? 'Ir a mis libros' : 'Ingresar' }}</span>
           <img src="icons/login-icon.svg" alt="login icon" />
         </button>
       </div>
