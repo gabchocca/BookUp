@@ -1,22 +1,189 @@
-<form class="form-container">
-  <div class="form-field">
-    <label for="bookName">Nombre del libro:</label>
-    <input type="text" id="bookName" name="bookName" value="">
+<div class="form-container">
+  <form (submit)="onSubmit($event)">
+
+    <!-- NOMBRE DEL LIBRO -->
+    <div class="form-field">
+      <label for="bookName">Nombre del libro:</label>
+      <input
+        type="text"
+        id="bookName"
+        [formField]="uploadForm.title"
+      />
+      @if (getErrorMessage(uploadForm.title); as errorMsg) {
+        <small class="text-danger fw-semibold">{{ errorMsg }}</small>
+      }
+    </div>
+
+    <!-- DESCRIPCIÓN -->
+    <div class="form-field">
+      <label for="description">Descripción:</label>
+      <input
+        type="text"
+        id="description"
+        [formField]="uploadForm.description"
+      />
+    </div>
+
+    <!-- RESEÑA -->
+    <div class="form-field">
+      <label for="review">Reseña:</label>
+      <input
+        type="text"
+        id="review"
+        [formField]="uploadForm.review"
+      />
+    </div>
+
+    <!-- DIRECCIÓN DEL ARCHIVO + BOTÓN EXPLORAR -->
+    <div class="form-field">
+      <label for="bookFilePath">Dirección del archivo:</label>
+      <div class="input-group">
+        <input
+          type="text"
+          id="bookFilePath"
+          class="form-control"
+          [formField]="uploadForm.path"
+          placeholder="Selecciona un PDF..."
+        />
+        <button
+          type="button"
+          class="btn btn-outline-secondary"
+          (click)="openExplorer()"
+        >
+          📁 Explorar
+        </button>
+      </div>
+      @if (getErrorMessage(uploadForm.path); as errorMsg) {
+        <small class="text-danger fw-semibold">{{ errorMsg }}</small>
+      }
+    </div>
+
+    <!-- BOTONES -->
+    <div class="form-field buttons">
+      <button type="submit" [disabled]="uploadForm().invalid() || isLoading()">
+        {{ isLoading() ? 'Guardando...' : 'Realizar' }}
+      </button>
+      <button type="button" (click)="onCancel()">Cancelar</button>
+    </div>
+
+  </form>
+</div>
+
+<!-- ========================================== -->
+<!-- MODAL 1: EXPLORADOR DE CARPETAS Y ARCHIVOS -->
+<!-- ========================================== -->
+@if (showExplorerModal()) {
+  <div class="modal-backdrop fade show"></div>
+
+  <div class="modal fade show d-block" tabindex="-1" role="dialog" (click)="closeExplorer()">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document" (click)="$event.stopPropagation()">
+      <div class="modal-content border-0 shadow-lg rounded-4">
+
+        <!-- Cabecera -->
+        <div class="modal-header border-bottom">
+          <h5 class="modal-title fw-bold">Seleccionar libro PDF</h5>
+          <button type="button" class="btn-close" aria-label="Close" (click)="closeExplorer()"></button>
+        </div>
+
+        <!-- Barra de ruta actual y botón Atrás -->
+        <div class="bg-light px-3 py-2 border-bottom d-flex align-items-center gap-2">
+          <button
+            type="button"
+            class="btn btn-sm btn-outline-secondary"
+            [disabled]="directoryData().parent_path === null || isLoadingExplorer()"
+            (click)="goBackFolder()"
+          >
+            ⬅ Atrás
+          </button>
+          <small class="text-truncate text-muted fw-semibold">
+            {{ directoryData().current_path || 'Este equipo (Discos)' }}
+          </small>
+        </div>
+
+        <!-- Cuerpo con carpetas y PDFs -->
+        <div class="modal-body p-0" style="min-height: 250px;">
+          @if (isLoadingExplorer()) {
+            <div class="d-flex justify-content-center align-items-center py-5">
+              <div class="spinner-border text-primary" role="status"></div>
+            </div>
+          } @else {
+            <div class="list-group list-group-flush">
+              <!-- Carpetas / Discos -->
+              @for (folder of directoryData().folders; track folder) {
+                <button
+                  type="button"
+                  class="list-group-item list-group-item-action d-flex align-items-center gap-2"
+                  (click)="enterFolder(folder)"
+                >
+                  <span>📁</span>
+                  <span class="text-truncate">{{ folder }}</span>
+                </button>
+              }
+
+              <!-- Archivos PDF -->
+              @for (file of directoryData().files; track file) {
+                <button
+                  type="button"
+                  class="list-group-item list-group-item-action d-flex align-items-center gap-2 text-primary fw-medium"
+                  (click)="selectPdfFile(file)"
+                >
+                  <span>📄</span>
+                  <span class="text-truncate">{{ file }}</span>
+                </button>
+              }
+
+              <!-- Carpeta vacía -->
+              @if (directoryData().folders.length === 0 && directoryData().files.length === 0) {
+                <div class="text-center text-muted py-5">
+                  No hay carpetas ni archivos PDF aquí
+                </div>
+              }
+            </div>
+          }
+        </div>
+
+        <!-- Pie -->
+        <div class="modal-footer border-top">
+          <button type="button" class="btn btn-secondary rounded-pill px-4" (click)="closeExplorer()">
+            Cancelar
+          </button>
+        </div>
+
+      </div>
+    </div>
   </div>
-  <div class="form-field">
-    <label for="description">Descripcion:</label>
-    <input type="text" id="description" name="description" value="">
+}
+
+<!-- ========================================== -->
+<!-- MODAL 2: ERROR AL SUBIR LIBRO (TU ORIGINAL)-->
+<!-- ========================================== -->
+@if (showErrorModal()) {
+  <div class="modal-backdrop fade show"></div>
+
+  <div class="modal fade show d-block" tabindex="-1" role="dialog" (click)="cerrarPopup()">
+    <div class="modal-dialog modal-dialog-centered modal-sm" role="document" (click)="$event.stopPropagation()">
+      <div class="modal-content border-0 shadow-lg rounded-4 p-3 text-center">
+
+        <div class="d-flex justify-content-end">
+          <button type="button" class="btn-close" aria-label="Close" (click)="cerrarPopup()"></button>
+        </div>
+
+        <div class="mx-auto mb-3 d-inline-flex align-items-center justify-content-center bg-danger-subtle text-danger rounded-circle p-3">
+          <span class="fs-2 lh-1">⚠️</span>
+        </div>
+
+        <div class="modal-body pt-0 pb-3">
+          <h5 class="fw-bold text-dark mb-2">No se pudo subir el libro</h5>
+          <p class="text-body-secondary mb-0">{{ errorMessage() }}</p>
+        </div>
+
+        <div class="modal-footer border-0 justify-content-center pt-0 pb-2">
+          <button type="button" class="btn btn-danger rounded-pill px-5 py-2 fw-semibold" (click)="cerrarPopup()">
+            Entendido
+          </button>
+        </div>
+
+      </div>
+    </div>
   </div>
-  <div class="form-field">
-    <label for="review">Reseña:</label>
-    <input type="text" id="review" name="review" value="">
-  </div>
-  <div class="form-field">
-    <label for="bookFilePath">Direccion del archivo:</label>
-    <input type="text" id="bookFilePath" name="bookFilePath" value="">
-  </div>
-  <div class="form-field buttons">
-    <button type="submit">Realizar</button>
-    <button type="button">Cancelar</button>
-  </div>
-</form>
+}

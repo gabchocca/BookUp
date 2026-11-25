@@ -1,14 +1,24 @@
-
-:host{
+:host {
   margin-top: 2rem;
-  display: flex;
-  flex-direction: column;
+  display: block;
   width: 100%;
-  align-items: center;
-  justify-content: center;
 }
 
-button{
+.empty-state {
+  width: 50%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.empty-state img {
+  max-width: 200px;
+  height: auto;
+}
+
+.btn-custom {
   font-size: 1.2em;
   border-radius: 25px;
   color: #fff;
@@ -16,27 +26,15 @@ button{
   padding: 15px 30px;
   border: none;
   font-family: "Itim", cursive;
+  transition: all 0.2s ease;
 }
 
-button:hover {
+.btn-custom:hover {
   background-color: #aa6B6B;
   transform: translateY(-2px);
   box-shadow: 0 4px 10px rgba(37, 98, 250, 0.3);
 }
 
-
-button:active {
+.btn-custom:active {
   transform: translateY(0);
-}
-
-div{
-  width: 50%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-}
-div img {
-  max-width: 200px;
-  height: auto;
 }

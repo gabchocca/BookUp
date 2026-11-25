@@ -3,9 +3,9 @@ from pydantic import BaseModel, Field, field_validator
 import pymupdf
 
 class Book(BaseModel):
-    path : str
-    description : str
-    review : str
+    path: str
+    description: str | None = None  
+    review: str | None = None       
     producer: str | None = None
     format: str | None = None
     encryption: str | None = None
@@ -36,7 +36,7 @@ class Book(BaseModel):
         return None   
 
 class BookUpdate(BaseModel):
-    title :str
-    author : str
-    description : str
-    review : str
+    title: str | None = None
+    author: str | None = None
+    description: str | None = None
+    review: str | None = None

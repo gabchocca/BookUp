@@ -1,8 +1,9 @@
-<h1>
-  “La lectura es el portal al mundo del conocimiento y critica, al mundo de los sueños y tambien de
-  las pesadillas, la lecutra es el portal a un mundo completamente nuevo.”
-</h1>
-<section class="section-home">
+<section class="hero">
+  <h1>
+    “La lectura es el portal al mundo del conocimiento y critica, al mundo de los sueños y tambien
+    de las pesadillas, la lecutra es el portal a un mundo completamente nuevo.”
+  </h1>
+  <div class="hero-content">
     <div class="div-img">
       <img src="images/Home.jpg" alt="Home" class="home-image" />
     </div>
@@ -13,10 +14,31 @@
         archivos, lecturas digitales en general.
       </p>
       <div class="div-button">
-        <button type="submit" [routerLink]="authService.isAuthenticated() ? '/myBooks' : '/login-register'">
+        <button
+          type="submit"
+          [routerLink]="authService.isAuthenticated() ? '/myBooks' : '/login-register'"
+        >
           <span>{{ authService.isAuthenticated() ? 'Ir a mis libros' : 'Ingresar' }}</span>
           <img src="icons/login-icon.svg" alt="login icon" />
         </button>
       </div>
     </div>
+  </div>
+</section>
+<section class="content-home">
+  <div class="content">
+    <p>
+      La lectura es un hábito de comunicación que permite desarrollar los pensamientos cognitivos e
+      interactivos de cualquier lector, el leer permite construir con facilidad nuevos
+      conocimientos.
+    </p>
+  </div>
+  <div class="content">
+    <h3>¡registra tus libros en distintos tipos de formato pdf, epub, xps, cbz, cbr</h3>
+    <img src="" alt="screenshotBooks" />
+  </div>
+  <div class="content">
+    <h3>Puedes organizarlos a travez de categorias</h3>
+    <img src="" alt="screenshotCategories" />
+  </div>
 </section>

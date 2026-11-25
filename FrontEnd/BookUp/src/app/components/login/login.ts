@@ -62,12 +62,12 @@ export class Login {
   }
 
   getErrorMessage(field: any): string | null {
-  const state = field();
-  if (state.dirty() && state.invalid()) {
-    const errors = state.errors();
-    return Array.isArray(errors) ? errors[0]?.message : errors?.message;
-  }
-  return null;
+    const state = field();
+    if (state.dirty() && state.invalid()) {
+      const errors = state.errors();
+      return Array.isArray(errors) ? errors[0]?.message : errors?.message;
+    }
+    return null;
   }
 
   onCancel(): void {

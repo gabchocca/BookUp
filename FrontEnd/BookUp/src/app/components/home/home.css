@@ -1,8 +1,17 @@
-:host{
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
+:host {
+  display: block;
+  width: 100%;
 }
+
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  min-height: 100dvh;
+  box-sizing: border-box;
+}
+
 h1 {
   font-family: "Jim Nightshade", cursive;
   font-weight: 500;
@@ -10,34 +19,42 @@ h1 {
   width: 100%;
   padding: 2rem 10rem;
   margin-top: 2rem;
-  margin-bottom: 2rem;
+  margin-bottom: 0;
   background-color: #403D88;
   color: #FBEFEF;
+  box-sizing: border-box;
 }
 
-.section-home{
+.hero-content {
   display: flex;
   flex-direction: row;
   justify-content: center;
+  align-items: center;
   gap: 20px;
   width: 70%;
+  flex: 1;
+  box-sizing: border-box;
 }
-.section-home img {
+
+.hero-content img {
   max-width: 100%;
   height: auto;
+  object-fit: contain;
 }
-.div-message{
+
+.div-message {
   display: flex;
   flex-direction: column;
-  align-self: center;
   align-items: center;
   gap: 20px;
 }
 
-.div-message p{
+.div-message p {
   font-family: "Itim", cursive;
+  font-size: 1.2em;
   text-align: justify;
 }
+
 .div-button {
   display: flex;
   justify-content: center;
@@ -47,7 +64,7 @@ h1 {
 .div-button button {
   display: flex;
   align-items: center;
-  gap: 8px; /* Si tienes un ícono dentro del botón, esto los separa */
+  gap: 8px;
   background-color: #FF6B6B;
   color: #fff;
   font-size: 1.2em;
@@ -55,18 +72,18 @@ h1 {
   border: none;
   border-radius: 25px;
   padding: 10px 20px;
-  cursor: pointer; /* Muestra la manito en toda el área roja */
+  cursor: pointer;
   transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .div-button button:hover {
-  background-color: #e05252; /* Coral más oscuro al pasar el mouse */
-  transform: translateY(-2px); /* Pequeña elevación */
+  background-color: #e05252;
+  transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(255, 107, 107, 0.4);
 }
 
 .div-button button:active {
-  transform: translateY(0); /* Baja al hacer clic */
+  transform: translateY(0);
 }
 
 @media (max-width: 992px) {
@@ -75,7 +92,7 @@ h1 {
     font-size: 2.2rem;
   }
 
-  .section-home {
+  .hero-content {
     width: 85%;
     gap: 20px;
   }
@@ -90,15 +107,13 @@ h1 {
     margin-bottom: 1.5rem;
   }
 
-  .section-home {
-    flex-direction: column;
+  .hero-content {
+    flex-direction: column; /* En columna para móviles */
     width: 90%;
     gap: 20px;
-    align-items: center;
   }
 
-
-  .section-home img {
+  .hero-content img {
     max-width: 260px;
   }
 

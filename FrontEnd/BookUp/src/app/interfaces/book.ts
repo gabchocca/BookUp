@@ -1,1 +1,14 @@
-export interface Book {}
+export interface Book {
+  title: string;
+  author: string;
+  description: string;
+  review: string;
+}
+
+export interface BookRequest{
+  title: string;
+  author: string;
+  description: string;
+  review: string;
+  path: string;
+}

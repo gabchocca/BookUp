@@ -4,6 +4,7 @@ import { Observable, tap, shareReplay } from 'rxjs';
 import { isPlatformBrowser } from '@angular/common';
 import { LoginResponse } from '../interfaces/login-response';
 import { RegisterRequest } from '../interfaces/register-request';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -11,10 +12,9 @@ import { RegisterRequest } from '../interfaces/register-request';
 
 export class Auth {
   private http = inject(HttpClient);
-private platformId = inject(PLATFORM_ID);
-  private apiUrl = 'http://localhost:8000/user';
+  private platformId = inject(PLATFORM_ID);
+  private apiUrl = `${environment.apiUrl}/user`;
 
-  // Signal reactivo para que el Navbar o cualquier componente sepa si hay sesión
   isAuthenticated = signal<boolean>(this.hasValidToken());
 
   register(data: RegisterRequest): Observable<unknown> {
