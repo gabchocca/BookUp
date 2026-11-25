@@ -1,5 +1,14 @@
 CREATE DATABASE "bookUp_db";
 
+CREATE TABLE IF NOT EXISTS users(
+    id SERIAL PRIMARY KEY,
+	  username TEXT UNIQUE NOT NULL,
+    email TEXT UNIQUE NOT NULL,
+    password TEXT NOT NULL,
+    name TEXT NOT NULL,
+    is_active BOOLEAN DEFAULT TRUE
+);
+
 CREATE TABLE IF NOT EXISTS book (
     id SERIAL PRIMARY KEY,
     user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
@@ -16,15 +25,6 @@ CREATE TABLE IF NOT EXISTS book (
     creation_date TEXT,
     mod_date TEXT,
     path_book TEXT
-);
-
-CREATE TABLE IF NOT EXISTS users(
-    id SERIAL PRIMARY KEY,
-	  username TEXT UNIQUE NOT NULL,
-    email TEXT UNIQUE NOT NULL,
-    password TEXT NOT NULL,
-    name TEXT NOT NULL,
-    is_active BOOLEAN DEFAULT TRUE
 );
 
 CREATE TABLE IF NOT EXISTS category (

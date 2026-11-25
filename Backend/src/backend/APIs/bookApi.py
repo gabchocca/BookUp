@@ -39,7 +39,11 @@ def getBookCover(book_id: int, conn: psycopg.Connection = Depends(get_db)):
     return Response(
         content=img_bytes,
         media_type="image/png",
-        headers={"Cache-Control": "public, max-age=86400"}
+        headers={
+            "Cache-Control": "no-store, no-cache, must-revalidate, max-age=0",
+            "Pragma": "no-cache",
+            "Expires": "0",
+        }
     )
 
 
