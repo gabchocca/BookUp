@@ -6,16 +6,6 @@ git clone https://github.com/gabchocca/BookUp.git
 cd BookUp
 ```
 
----
-
-### 2. Clave secreta (`SECRET_KEY`)
-Genera una clave secreta para firmar los tokens JWT y úsala en tu archivo `.env` posteriormente:
-```bash
-python -c "import secrets; print(secrets.token_hex(32))"
-```
-
----
-
 ### Opción A: Con Docker (Recomendado)
 Requiere tener instalado **Docker** y **Docker Compose**.
 
