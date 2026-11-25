@@ -5,14 +5,6 @@
 git clone https://github.com
 cd tu-repositorio
 ```
-
----
-### 2. Clave secreta ()
-Genera (`SECRET_KEY`) para firmar los tokens JWT y usala en .env posteriormente:
-```bash
-python -c "import secrets; print(secrets.token_hex(32))"
-```
-
 ### Opción A: Con Docker (Recomendado)
 Requiere tener instalado **Docker** y **Docker Compose**.
 
