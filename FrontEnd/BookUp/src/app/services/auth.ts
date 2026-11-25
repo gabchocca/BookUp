@@ -5,6 +5,7 @@ import { isPlatformBrowser } from '@angular/common';
 import { LoginResponse } from '../interfaces/login-response';
 import { RegisterRequest } from '../interfaces/register-request';
 import { environment } from '../../environments/environment';
+import { User, UserUpdate } from '../interfaces/user';
 
 @Injectable({
   providedIn: 'root'
@@ -28,7 +29,23 @@ export class Auth {
     );
   }
 
-private setSession(authResult: LoginResponse): void {
+  logout(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      localStorage.removeItem('id_token');
+      localStorage.removeItem('expires_at');
+    }
+    this.isAuthenticated.set(false);
+  }
+
+  getProfile(): Observable<User> {
+    return this.http.get<User>(`${this.apiUrl}/me`);
+  }
+
+  updateProfile(data: UserUpdate): Observable<User> {
+    return this.http.patch<User>(`${this.apiUrl}/me`, data);
+  }
+
+  private setSession(authResult: LoginResponse): void {
     if (isPlatformBrowser(this.platformId)) {
       const expiresAt = Date.now() + authResult.expiresIn * 1000;
       localStorage.setItem('id_token', authResult.idToken);
@@ -37,14 +54,7 @@ private setSession(authResult: LoginResponse): void {
     this.isAuthenticated.set(true);
   }
 
-  logout(): void {
-    if (isPlatformBrowser(this.platformId)) {
-      localStorage.removeItem('id_token');
-      localStorage.removeItem('expires_at');
-    }
-    this.isAuthenticated.set(false);
-  }
-public hasValidToken(): boolean {
+  public hasValidToken(): boolean {
     //
     if (!isPlatformBrowser(this.platformId)) {
       return false;
@@ -54,4 +64,6 @@ public hasValidToken(): boolean {
     if (!expiration) return false;
     return Date.now() < JSON.parse(expiration);
   }
+
 }
+

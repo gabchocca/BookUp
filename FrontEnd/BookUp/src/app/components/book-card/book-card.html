@@ -1,9 +1,24 @@
-<button
-  type="button"
-  class="card h-100 border-0 shadow-sm text-start p-0 overflow-hidden bg-white"
-  style="width: 180px;"
+<div
+  role="button"
+  tabindex="0"
+  class="card h-100 shadow-sm text-start p-0 overflow-hidden bg-white position-relative"
+  [class.border-primary]="isSelected()"
+  [class.border-2]="isSelected()"
+  [class.border-0]="!isSelected()"
+  [class.opacity-75]="selectionMode() && !isSelected()"
+  style="width: 180px; max-width: 180px; cursor: pointer;"
   (click)="onCardClick()"
 >
+  @if (selectionMode()) {
+    <span
+      class="position-absolute top-0 start-0 m-2 badge rounded-pill z-2"
+      [class.bg-primary]="isSelected()"
+      [class.bg-secondary]="!isSelected()"
+    >
+      {{ isSelected() ? '✓' : '○' }}
+    </span>
+  }
+
   @if (!imageError()) {
     <img
       [src]="coverUrl()"
@@ -24,4 +39,4 @@
       {{ book().title || 'Sin título' }}
     </h6>
   </div>
-</button>
+</div>

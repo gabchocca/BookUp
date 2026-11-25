@@ -63,7 +63,7 @@ export class Register {
   cerrarPopup(): void {
     this.showErrorModal.set(false);
   }
-  
+
   getErrorMessage(field: any): string | null {
   const state = field();
   if (state.dirty() && state.invalid()) {
@@ -81,6 +81,8 @@ export class Register {
       password: '',
       name: ''
     });
+    this.registerForm().reset();
     this.errorMessage.set('');
+    this.router.navigate(['/']);
   }
 }

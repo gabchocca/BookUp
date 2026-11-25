@@ -1,5 +1,5 @@
 
-from pydantic import BaseModel
+from pydantic import BaseModel,  EmailStr
 
 class User (BaseModel):
     username : str
@@ -11,3 +11,9 @@ class User (BaseModel):
 class LoginRequest(BaseModel):
     identifier: str
     password: str
+
+class UserUpdate(BaseModel):
+    name: str | None = None
+    username: str | None = None
+    email: EmailStr | None = None
+    password: str | None = None

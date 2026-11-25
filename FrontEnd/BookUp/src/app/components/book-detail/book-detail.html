@@ -1,0 +1,168 @@
+@if (isLoading()) {
+  <div class="d-flex justify-content-center align-items-center py-5">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Cargando detalles...</span>
+    </div>
+  </div>
+}
+@else if (book(); as item) {
+  <div class="container py-4">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <a routerLink="/myBooks/books" class="btn btn-outline-secondary rounded-pill px-3">
+        ⬅ Volver a Mis Libros
+      </a>
+
+      @if (!isEditing()) {
+        <button type="button" class="btn btn-primary rounded-pill px-4" (click)="startEditing()">
+          ✏️ Editar
+        </button>
+      }
+    </div>
+
+    @if (successMessage()) {
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ successMessage() }}
+        <button type="button" class="btn-close" aria-label="Close" (click)="successMessage.set('')"></button>
+      </div>
+    }
+    @if (errorMessage()) {
+      <div class="alert alert-danger" role="alert">
+        {{ errorMessage() }}
+      </div>
+    }
+
+    <div class="card border-0 shadow-sm rounded-4 overflow-hidden bg-white">
+      <div class="row g-0">
+
+        <div class="col-md-4 col-lg-3 bg-light d-flex align-items-center justify-content-center p-3">
+          @if (!imageError()) {
+            <img
+              [src]="coverUrl()"
+              [alt]="item.title || 'Portada'"
+              (error)="onImageError()"
+              class="img-fluid rounded-3 shadow-sm object-fit-cover"
+              style="max-height: 360px;"
+            />
+          } @else {
+            <div class="d-flex flex-column align-items-center justify-content-center text-secondary py-5">
+              <span class="display-1">📖</span>
+              <small>Sin portada</small>
+            </div>
+          }
+        </div>
+
+        <div class="col-md-8 col-lg-9">
+          <div class="card-body p-4">
+
+            @if (!isEditing()) {
+              <h3 class="fw-bold text-dark mb-1">{{ item.title || 'Sin título' }}</h3>
+              <p class="text-muted mb-4">
+                <strong>Autor:</strong> {{ item.author || 'Desconocido' }}
+              </p>
+
+              <div class="mb-3">
+                <h6 class="fw-bold text-secondary text-uppercase small">Descripción</h6>
+                <p class="text-body mb-0">{{ item.description || 'Sin descripción registrada.' }}</p>
+              </div>
+
+              <div class="mb-4">
+                <h6 class="fw-bold text-secondary text-uppercase small">Reseña personal</h6>
+                <p class="text-body mb-0">{{ item.review || 'Aún no has escrito una reseña.' }}</p>
+              </div>
+
+              <hr class="my-4" />
+
+              <!-- Metadatos técnicos del PDF -->
+              <h6 class="fw-bold text-secondary text-uppercase small mb-3">Información del archivo</h6>
+              <div class="row g-2 small text-muted">
+                <div class="col-sm-6">
+                  <strong>Formato:</strong> {{ item.format || 'N/A' }}
+                </div>
+                <div class="col-sm-6">
+                  <strong>Fecha de creación:</strong> {{ item.creation_date ? (item.creation_date | date:'mediumDate') : 'N/A' }}
+                </div>
+                <div class="col-sm-6">
+                  <strong>Creador:</strong> {{ item.creator || 'N/A' }}
+                </div>
+                <div class="col-sm-6">
+                  <strong>Productor:</strong> {{ item.producer || 'N/A' }}
+                </div>
+                @if (item.keywords) {
+                  <div class="col-12">
+                    <strong>Palabras clave:</strong> {{ item.keywords }}
+                  </div>
+                }
+                <div class="col-12 text-truncate" [title]="item.path_book">
+                  <strong>Ruta:</strong> {{ item.path_book || 'N/A' }}
+                </div>
+              </div>
+            }
+            @else {
+              <!-- MODO EDICIÓN (Solo Título, Descripción y Reseña) -->
+              <h4 class="fw-bold mb-3">Editar información del libro</h4>
+              <p class="text-muted small mb-3">
+                <strong>Autor:</strong> {{ item.author || 'Desconocido' }} (no editable)
+              </p>
+
+              <form (submit)="saveChanges($event)">
+                <div class="mb-3">
+                  <label for="editTitle" class="form-label fw-semibold">Título</label>
+                  <input
+                    type="text"
+                    id="editTitle"
+                    class="form-control"
+                    [formField]="editForm.title"
+                  />
+                  @if (editForm.title().dirty() && editForm.title().invalid()) {
+                    <small class="text-danger fw-semibold">El título es obligatorio</small>
+                  }
+                </div>
+
+                <div class="mb-3">
+                  <label for="editDescription" class="form-label fw-semibold">Descripción</label>
+                  <textarea
+                    id="editDescription"
+                    rows="3"
+                    class="form-control"
+                    [formField]="editForm.description"
+                  ></textarea>
+                </div>
+
+                <div class="mb-4">
+                  <label for="editReview" class="form-label fw-semibold">Reseña</label>
+                  <textarea
+                    id="editReview"
+                    rows="4"
+                    class="form-control"
+                    [formField]="editForm.review"
+                  ></textarea>
+                </div>
+
+                <div class="d-flex gap-2">
+                  <button
+                    type="submit"
+                    class="btn btn-success rounded-pill px-4 fw-semibold"
+                    [disabled]="editForm().invalid() || isSaving()"
+                  >
+                    {{ isSaving() ? 'Guardando...' : 'Guardar cambios' }}
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-light rounded-pill px-4"
+                    (click)="cancelEditing()"
+                    [disabled]="isSaving()"
+                  >
+                    Cancelar
+                  </button>
+                </div>
+              </form>
+            }
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+}

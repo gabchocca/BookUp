@@ -1,26 +1,38 @@
 <div class="my-books">
-  <aside class="submenu">
-      <ul class="submenu-list">
+  <div class="mobile-menu-bar">
+    <button type="button" class="menu-toggle-btn" (click)="toggleMenu()" aria-label="Abrir menú">
+      <span class="menu-icon">{{ isMenuOpen() ? '✕' : '☰' }}</span>
+      <span>Menú</span>
+    </button>
+  </div>
 
-          <li class="submenu-item">
-              <a routerLink="books" routerLinkActive="active" class="submenu-link">
-                  <span>Mis libros</span>
-              </a>
-          </li>
+  <aside class="submenu" [class.open]="isMenuOpen()">
+    <ul class="submenu-list">
+      <li class="submenu-item">
+        <a routerLink="profile" routerLinkActive="active" class="submenu-link" (click)="closeMenu()">
+          <span>Perfil</span>
+        </a>
+      </li>
 
-          <li class="submenu-item">
-              <a routerLink="categories" routerLinkActive="active" class="submenu-link">
-                  <span>Categorias</span>
-              </a>
-          </li>
+      <li class="submenu-item">
+        <a routerLink="books" routerLinkActive="active" class="submenu-link" (click)="closeMenu()">
+          <span>Mis libros</span>
+        </a>
+      </li>
 
-          <li class="submenu-item">
-              <a routerLink="uploadBook" routerLinkActive="active" class="submenu-link">
-                  <span>Subir libro</span>
-              </a>
-          </li>
+      <li class="submenu-item">
+        <a routerLink="categories" routerLinkActive="active" class="submenu-link" (click)="closeMenu()">
+          <span>Categorias</span>
+        </a>
+      </li>
 
-      </ul>
+      <li class="submenu-item">
+        <a routerLink="uploadBook" routerLinkActive="active" class="submenu-link" (click)="closeMenu()">
+          <span>Subir libro</span>
+        </a>
+      </li>
+    </ul>
   </aside>
-    <router-outlet></router-outlet>
+
+  <router-outlet></router-outlet>
 </div>

@@ -27,6 +27,7 @@
   border: none;
   font-family: "Itim", cursive;
   transition: all 0.2s ease;
+  white-space: nowrap;
 }
 
 .btn-custom:hover {
@@ -37,4 +38,32 @@
 
 .btn-custom:active {
   transform: translateY(0);
+}
+
+.btn-header {
+  font-size: 1rem;
+  padding: 8px 20px;
+}
+
+@media (max-width: 768px) {
+  :host {
+    margin-top: 1rem;
+  }
+
+  .empty-state {
+    width: 85%;
+  }
+}
+
+@media (max-width: 576px) {
+  .header-actions {
+    width: 100%;
+  }
+
+  .header-actions button {
+    flex: 1 1 auto;
+    text-align: center;
+    font-size: 0.9rem;
+    padding: 8px 14px;
+  }
 }

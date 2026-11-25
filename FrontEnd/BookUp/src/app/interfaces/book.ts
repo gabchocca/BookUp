@@ -12,3 +12,9 @@ export interface BookRequest{
   review: string;
   path: string;
 }
+
+export interface BookEdit{
+  title: string;
+  description: string;
+  review: string;
+}

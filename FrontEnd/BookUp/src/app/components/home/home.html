@@ -1,26 +1,37 @@
 <section class="hero">
-  <h1>
-    “La lectura es el portal al mundo del conocimiento y critica, al mundo de los sueños y tambien
-    de las pesadillas, la lecutra es el portal a un mundo completamente nuevo.”
-  </h1>
+  <blockquote class="hero-quote">
+    “La lectura es el portal al mundo del conocimiento y la crítica, al mundo de los sueños y también
+    de las pesadillas; la lectura es el portal a un mundo completamente nuevo.”
+  </blockquote>
+
   <div class="hero-content">
     <div class="div-img">
-      <img src="images/Home.jpg" alt="Home" class="home-image" />
+      <img src="images/Home.jpg" alt="Lectura en BookUp" class="home-image" />
     </div>
 
     <div class="div-message">
+      <span class="hero-badge">📚 Tu biblioteca digital</span>
+      <h2>Organiza tus lecturas en un solo lugar</h2>
       <p>
-        BookUp es una aplicacion web desarrollada para facilitar la organizacion de libros,
-        archivos, lecturas digitales en general.
+        <strong>BookUp</strong> es una aplicación web diseñada para guardar, ordenar y dar seguimiento a
+        tus libros, archivos y lecturas digitales sin complicaciones.
       </p>
+
       <div class="div-button">
         <button
-          type="submit"
+          type="button"
+          class="btn-primary"
           [routerLink]="authService.isAuthenticated() ? '/myBooks' : '/login-register'"
         >
-          <span>{{ authService.isAuthenticated() ? 'Ir a mis libros' : 'Ingresar' }}</span>
-          <img src="icons/login-icon.svg" alt="login icon" />
+          <span>{{ authService.isAuthenticated() ? 'Ir a mis libros' : 'Comenzar ahora' }}</span>
+          <img src="icons/login-icon.svg" alt="" class="btn-icon" />
         </button>
+      </div>
+
+      <div class="hero-features">
+        <span>✨ Organiza por estado</span>
+        <span>📂 Guarda tus archivos</span>
+        <span>🚀 Acceso rápido</span>
       </div>
     </div>
   </div>
@@ -34,11 +45,11 @@
     </p>
   </div>
   <div class="content">
-    <h3>¡registra tus libros en distintos tipos de formato pdf, epub, xps, cbz, cbr</h3>
-    <img src="" alt="screenshotBooks" />
+    <h3>¡Registra tus libros en distintos tipos de formato pdf, epub, xps, cbz, cbr</h3>
+    <img src="images/misLibros.png" alt="screenshotBooks" />
   </div>
   <div class="content">
     <h3>Puedes organizarlos a travez de categorias</h3>
-    <img src="" alt="screenshotCategories" />
+    <img src="images/categories.png" alt="screenshotCategories" />
   </div>
 </section>

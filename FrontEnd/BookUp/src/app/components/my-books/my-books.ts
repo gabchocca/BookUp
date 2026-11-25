@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 
 @Component({
@@ -7,4 +7,14 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
   templateUrl: './my-books.html',
   styleUrl: './my-books.css',
 })
-export class MyBooks {}
+export class MyBooks {
+  isMenuOpen = signal<boolean>(false);
+
+  toggleMenu(): void {
+    this.isMenuOpen.update(val => !val);
+  }
+
+  closeMenu(): void {
+    this.isMenuOpen.set(false);
+  }
+}

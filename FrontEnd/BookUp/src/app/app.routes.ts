@@ -9,6 +9,8 @@ import { LoginRegister } from './components/login-register/login-register';
 import { Register } from './components/register/register';
 import { authGuard } from './guards/auth-guard';
 import { authChildGuard } from './guards/auth-child-guard';
+import { BookDetail } from './components/book-detail/book-detail';
+import { Profile } from './components/profile/profile';
 
 export const routes: Routes = [
   { path: "home", component: Home },
@@ -30,6 +32,8 @@ export const routes: Routes = [
       { path: "books", component: Books },
       { path: "categories", component: Categories },
       { path: "uploadBook", component: UploadBook },
+      { path: "book/:id", component: BookDetail },
+      { path: "profile", component: Profile },
       { path: "", redirectTo: "books", pathMatch: "full" }
     ]
   },

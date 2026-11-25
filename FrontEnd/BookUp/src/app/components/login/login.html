@@ -1,76 +1,81 @@
-<div class="form-container">
-  <form (submit)="onSubmit($event)">
-
-    <!-- IDENTIFIER -->
-    <div class="form-field">
-      <label for="usuario">Usuario o correo:</label>
-      <input
-        type="text"
-        id="usuario"
-        [formField]="loginForm.identifier"
-      />
-      @if (getErrorMessage(loginForm.identifier); as errorMsg) {
-        <small class="text-danger fw-semibold">{{ errorMsg }}</small>
-      }
+<div class="login-wrapper">
+  <div class="form-container">
+    <div class="form-header">
+      <span class="login-badge">📚 BookUp</span>
+      <h2>¡Bienvenido de nuevo!</h2>
+      <p>Ingresa tus datos para acceder a tu biblioteca</p>
     </div>
 
-    <!-- PASSWORD -->
-    <div class="form-field">
-      <label for="password">Contraseña:</label>
-      <input
-        type="password"
-        id="password"
-        [formField]="loginForm.password"
-      />
-      @if (getErrorMessage(loginForm.password); as errorMsg) {
-        <small class="text-danger fw-semibold">{{ errorMsg }}</small>
-      }
-    </div>
+    <form (submit)="onSubmit($event)">
+      <!-- IDENTIFIER -->
+      <div class="form-field">
+        <label for="usuario">Usuario o correo</label>
+        <input
+          type="text"
+          id="usuario"
+          placeholder="Ej. lector@bookup.com"
+          [formField]="loginForm.identifier"
+        />
+        @if (getErrorMessage(loginForm.identifier); as errorMsg) {
+          <small class="error-text">{{ errorMsg }}</small>
+        }
+      </div>
 
-    <!-- BOTONES -->
-    <div class="form-field buttons">
-      <button type="submit" [disabled]="loginForm().invalid() || isLoading()">
-        {{ isLoading() ? 'Ingresando...' : 'Enviar' }}
-      </button>
-      <button type="button" (click)="onCancel()">Cancelar</button>
-    </div>
-  </form>
+      <!-- PASSWORD -->
+      <div class="form-field">
+        <label for="password">Contraseña</label>
+        <input
+          type="password"
+          id="password"
+          placeholder="••••••••"
+          [formField]="loginForm.password"
+        />
+        @if (getErrorMessage(loginForm.password); as errorMsg) {
+          <small class="error-text">{{ errorMsg }}</small>
+        }
+      </div>
 
-  <a routerLink="/login-register/register">¿Aún no te has registrado?</a>
+      <!-- BOTONES -->
+      <div class="form-field buttons">
+        <button type="submit" [disabled]="loginForm().invalid() || isLoading()">
+          {{ isLoading() ? 'Ingresando...' : 'Ingresar' }}
+        </button>
+        <!-- Redirige al inicio o ejecuta tu onCancel() -->
+        <button type="button" routerLink="/" (click)="onCancel()">Cancelar</button>
+      </div>
+    </form>
+
+    <div class="form-footer">
+      <span>¿Aún no tienes cuenta?</span>
+      <a routerLink="/login-register/register">Regístrate aquí</a>
+    </div>
+  </div>
 </div>
 
 @if (showErrorModal()) {
-  <!-- Fondo oscuro de Bootstrap -->
   <div class="modal-backdrop fade show"></div>
 
-  <!-- Modal centrado de Bootstrap -->
   <div class="modal fade show d-block" tabindex="-1" role="dialog" (click)="cerrarPopup()">
     <div class="modal-dialog modal-dialog-centered modal-sm" role="document" (click)="$event.stopPropagation()">
-      <div class="modal-content border-0 shadow-lg rounded-4 p-3 text-center">
-
-        <!-- Botón cerrar -->
+      <div class="modal-content custom-modal p-3 text-center">
         <div class="d-flex justify-content-end">
           <button type="button" class="btn-close" aria-label="Close" (click)="cerrarPopup()"></button>
         </div>
 
-        <!-- Icono de alerta con fondo suave de Bootstrap -->
         <div class="mx-auto mb-3 d-inline-flex align-items-center justify-content-center bg-danger-subtle text-danger rounded-circle p-3">
           <span class="fs-2 lh-1">⚠️</span>
         </div>
 
-        <!-- Título y mensaje -->
         <div class="modal-body pt-0 pb-3">
           <h5 class="fw-bold text-dark mb-2">No se pudo iniciar sesión</h5>
           <p class="text-body-secondary mb-0">{{ errorMessage() }}</p>
         </div>
 
-        <!-- Botón de acción -->
         <div class="modal-footer border-0 justify-content-center pt-0 pb-2">
-          <button type="button" class="btn btn-danger rounded-pill px-5 py-2 fw-semibold" (click)="cerrarPopup()">
+          <button type="button" class="btn-modal-close" (click)="cerrarPopup()">
             Entendido
           </button>
         </div>
-
       </div>
     </div>
   </div>

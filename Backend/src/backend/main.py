@@ -3,6 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from .APIs.bookApi import routerBook
 from .APIs.userApi import routerUser
+from .APIs.categoryAPI import routerCategory
 import psycopg
 import os
 
@@ -35,7 +36,7 @@ app.add_middleware(
 #Router configuration
 app.include_router(routerBook)
 app.include_router(routerUser)
-
+app.include_router(routerCategory)
 
 @app.exception_handler(BookNotFoundError)
 async def book_not_found_handler(request: Request, exc: BookNotFoundError):

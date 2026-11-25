@@ -1,171 +1,215 @@
-:host {
-  display: block;
-  width: 100%;
+*, *::before, *::after {
+  box-sizing: border-box;
 }
 
-.form-container {
-  width: 50%;
-  margin: 2rem auto 0 auto; /* El 'auto' a los lados lo centra horizontalmente siempre */
+:host {
+  width: 100%;
+  min-height: calc(100dvh - 80px);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 20px;
+  background-color: #faf9ff;
+  background-image: radial-gradient(#403D8822 1.5px, transparent 1.5px);
+  background-size: 24px 24px;
+  padding: 2.5rem 1rem;
+  font-family: "Itim", cursive;
 }
 
-/* ESTA ES LA REGLA QUE FALTABA PARA QUE NO SE ACHIQUE EL ANCHO */
+/* TARJETA PRINCIPAL ESTILO BOOKUP */
+.form-container {
+  width: 100%;
+  max-width: 520px;
+  margin: 0 auto;
+  background-color: #ffffff;
+  border: 3px solid #19192C;
+  border-radius: 24px;
+  box-shadow: 10px 10px 0px #403D88;
+  padding: 2.2rem 2.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.4rem;
+}
+
+.form-container::before {
+  content: "📚 Crea tu cuenta en BookUp";
+  font-size: 1.75em;
+  color: #19192C;
+  text-align: center;
+  width: 100%;
+  padding-bottom: 0.8rem;
+  border-bottom: 3px dashed #dcdaf5;
+}
+
 .form-container form {
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
+  gap: 1.1rem;
 }
 
+/* CAMPOS */
 .form-field {
   width: 100%;
-  box-sizing: border-box; /* Evita que el padding desborde el 100% */
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  padding: 1rem;
-  border: 1px dashed #929292;
-  border-radius: 15px;
+  gap: 0.45rem;
+  padding: 0.85rem 1.1rem;
+  background-color: #f8f7ff;
+  border: 2px solid #19192C;
+  border-radius: 16px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
 }
 
 .form-field:focus-within {
-  border: 1px solid #000;
-  box-shadow: 0 0 0 1px #000;
+  background-color: #ffffff;
+  border-color: #403D88;
+  box-shadow: 4px 4px 0px #403D88;
+  transform: translate(-2px, -2px);
 }
 
 .form-field label {
-  font-size: 1.2em;
-  font-family: "Itim", cursive;
-  border-bottom: 1px solid #929292;
+  font-size: 1.08em;
+  color: #403D88;
+  border-bottom: none;
 }
 
 .form-field input {
   width: 100%;
-  box-sizing: border-box;
-  border-top: 0;
-  border-right: 0;
-  border-left: 0;
-  border-bottom: 2px solid #E95A5A;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid #c5c3e8;
   font-family: "Itim", cursive;
-  font-size: 1em;
-  padding: 5px;
+  font-size: 1.08em;
+  color: #19192C;
+  padding: 4px 2px;
+  transition: border-color 0.2s ease;
+}
+
+.form-field input::placeholder {
+  color: #a3a1c2;
 }
 
 .form-field input:focus {
   outline: none;
-  border-bottom: 2px solid #E95A5A;
+  border-bottom: 2px solid #FF6B6B;
 }
 
+.form-field small {
+  font-size: 0.92em;
+  margin-top: 2px;
+}
+
+/* BOTONES */
 .form-field.buttons {
+  background: transparent;
+  border: none;
+  padding: 0.5rem 0 0 0;
   display: flex;
   flex-direction: row;
-  gap: 30px;
-  justify-content: center;
-  border: none;
-  font-family: inherit;
+  gap: 1rem;
+  justify-content: space-between;
 }
 
 .form-field.buttons:focus-within {
   border: none;
   box-shadow: none;
-}
-
-.form-field.buttons button[type="submit"] {
-  font-size: 1.2em;
-  border-radius: 25px;
-  color: #fff;
-  background-color: #2562FA;
-  padding: 15px 30px;
-  border: none;
-  font-family: "Itim", cursive;
-}
-
-.form-field.buttons button[type="button"] {
-  font-size: 1.2em;
-  border-radius: 25px;
-  color: #fff;
-  background-color: #EE2929;
-  padding: 15px 20px;
-  border: none;
-  font-family: "Itim", cursive;
+  transform: none;
 }
 
 .form-field.buttons button {
-  font-size: 1.2em;
+  flex: 1;
+  font-size: 1.15em;
   border-radius: 25px;
-  color: #fff;
-  border: none;
+  border: 3px solid #19192C;
   font-family: "Itim", cursive;
+  padding: 12px 20px;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  transition: background-color 0.2s ease, transform 0.15s ease, box-shadow 0.15s ease;
 }
 
-.form-field.buttons button[type="submit"]:disabled {
-  background-color: #9bb5f7;
-  cursor: not-allowed;
-  transform: none;
-  box-shadow: none;
+.form-field.buttons button[type="submit"] {
+  background-color: #403D88;
+  color: #ffffff;
+  box-shadow: 4px 4px 0px #19192C;
 }
 
 .form-field.buttons button[type="submit"]:not(:disabled):hover {
-  background-color: #1a4cd1;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 10px rgba(37, 98, 250, 0.3);
+  background-color: #322f6e;
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0px #19192C;
+}
+
+.form-field.buttons button[type="submit"]:disabled {
+  background-color: #a8a6cf;
+  border-color: #6c6a8a;
+  color: #ffffff;
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+.form-field.buttons button[type="button"] {
+  background-color: #FF6B6B;
+  color: #ffffff;
+  box-shadow: 4px 4px 0px #19192C;
 }
 
 .form-field.buttons button[type="button"]:hover {
-  background-color: #c91e1e;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 10px rgba(238, 41, 41, 0.3);
+  background-color: #e05252;
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0px #19192C;
 }
 
-.form-field.buttons button:active {
-  transform: translateY(0);
+.form-field.buttons button:active:not(:disabled) {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0px #19192C;
 }
 
 .form-container > a {
   font-family: "Itim", cursive;
-  color: #333;
+  font-size: 1.05em;
+  color: #FF6B6B;
   text-decoration: none;
+  border-top: 2px dashed #dcdaf5;
+  padding-top: 1rem;
+  width: 100%;
+  text-align: center;
+  transition: color 0.2s ease;
 }
 
 .form-container > a:hover {
-  color: #b81818;
+  color: #403D88;
   text-decoration: underline;
 }
 
-
-@media (max-width: 992px) {
-  .form-container {
-    width: 75%;
-  }
+.modal-content {
+  border: 3px solid #19192C !important;
+  border-radius: 24px !important;
+  box-shadow: 8px 8px 0px #FF6B6B !important;
+  font-family: "Itim", cursive;
 }
 
+/* ==========================================================================
+   MEDIA QUERIES
+   ========================================================================== */
 @media (max-width: 600px) {
   .form-container {
-    width: 100%;
-    box-sizing: border-box;
-    margin-top: 1.2rem;
-    gap: 15px;
-    padding: 20px;
+    padding: 1.6rem 1.3rem;
+    box-shadow: 6px 6px 0px #403D88;
   }
 
-  .form-container form {
-    gap: 15px;
+  .form-container::before {
+    font-size: 1.45em;
   }
 
   .form-field {
-    padding: 0.85rem;
-    gap: 12px;
+    padding: 0.8rem;
   }
 
   .form-field label {
-    font-size: 1.05em;
+    font-size: 1.02em;
   }
 
   .form-field.buttons {

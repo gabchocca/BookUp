@@ -1,3 +1,135 @@
-:host{
+:host {
   margin-top: 2rem;
+  display: block;
+  width: 100%;
+}
+
+.text-coral {
+  color: #FF6B6B;
+}
+
+.spinner-coral {
+  color: #FF6B6B;
+}
+
+.empty-state {
+  width: 50%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.btn-custom {
+  font-size: 1.2em;
+  border-radius: 25px;
+  color: #fff;
+  background-color: #FF6B6B;
+  padding: 15px 30px;
+  border: none;
+  font-family: "Itim", cursive;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.btn-custom:hover:not(:disabled) {
+  background-color: #aa6B6B;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(255, 107, 107, 0.35);
+}
+
+.btn-custom:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.btn-custom:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btn-header {
+  font-size: 1rem;
+  padding: 8px 20px;
+}
+
+/* Pills de categorías */
+.category-pill {
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+  color: #333;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.category-pill:hover {
+  border-color: #FF6B6B;
+  background-color: #fff5f5;
+}
+
+.category-pill.active {
+  background-color: #FF6B6B;
+  border-color: #FF6B6B;
+  color: #fff;
+  box-shadow: 0 4px 10px rgba(255, 107, 107, 0.3);
+}
+
+.category-pill .count-badge {
+  background-color: #e9ecef;
+  color: #495057;
+  font-size: 0.75rem;
+}
+
+.category-pill.active .count-badge {
+  background-color: rgba(255, 255, 255, 0.25);
+  color: #fff;
+}
+
+.btn-delete-cat {
+  background: transparent;
+  border: none;
+  color: inherit;
+  font-size: 1.15rem;
+  line-height: 1;
+  padding: 0 4px;
+  opacity: 0.75;
+  transition: opacity 0.15s ease;
+}
+
+.btn-delete-cat:hover {
+  opacity: 1;
+}
+
+.badge-added {
+  background-color: #fff0f0;
+  color: #FF6B6B;
+  border: 1px solid #FF6B6B;
+}
+
+.custom-checkbox:checked {
+  background-color: #FF6B6B;
+  border-color: #FF6B6B;
+}
+
+@media (max-width: 768px) {
+  :host {
+    margin-top: 1rem;
+  }
+
+  .empty-state {
+    width: 85%;
+  }
+}
+
+@media (max-width: 576px) {
+  .header-actions {
+    width: 100%;
+  }
+
+  .header-actions button {
+    flex: 1 1 auto;
+    text-align: center;
+    font-size: 0.9rem;
+    padding: 8px 14px;
+  }
 }

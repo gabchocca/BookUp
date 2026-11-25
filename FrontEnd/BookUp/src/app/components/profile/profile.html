@@ -1,0 +1,85 @@
+@if (isLoading()) {
+  <div class="d-flex justify-content-center py-5 w-100">
+    <div class="spinner-border text-primary" role="status"></div>
+  </div>
+} @else if (user(); as u) {
+  <div class="container-fluid py-4 px-4 w-100">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h4 class="fw-bold mb-0">Mi Perfil</h4>
+      @if (!isEditing()) {
+        <button type="button" class="btn btn-primary rounded-pill px-4" (click)="startEditing()">
+          ✏️ Editar perfil
+        </button>
+      }
+    </div>
+
+    @if (successMessage()) {
+      <div class="alert alert-success">{{ successMessage() }}</div>
+    }
+    @if (errorMessage()) {
+      <div class="alert alert-danger">{{ errorMessage() }}</div>
+    }
+
+    <div class="card border-0 shadow-sm rounded-4 p-4 bg-white w-100">
+      @if (!isEditing()) {
+        <div class="row g-3">
+          <div class="col-md-4">
+            <small class="text-muted text-uppercase fw-bold d-block">Nombre</small>
+            <span class="fs-5">{{ u.name }}</span>
+          </div>
+          <div class="col-md-4">
+            <small class="text-muted text-uppercase fw-bold d-block">Usuario</small>
+            <span class="fs-5">&#64;{{ u.username }}</span>
+          </div>
+          <div class="col-md-4">
+            <small class="text-muted text-uppercase fw-bold d-block">Correo electrónico</small>
+            <span class="fs-5">{{ u.email }}</span>
+          </div>
+        </div>
+      } @else {
+        <form (submit)="saveChanges($event)">
+          <div class="row g-3 mb-4">
+            <div class="col-md-6">
+              <label class="form-label fw-semibold">Nombre</label>
+              <input type="text" class="form-control" [formField]="profileForm.name" />
+              @if (getErrorMessage(profileForm.name); as msg) {
+                <small class="text-danger fw-semibold">{{ msg }}</small>
+              }
+            </div>
+            <div class="col-md-6">
+              <label class="form-label fw-semibold">Usuario</label>
+              <input type="text" class="form-control" [formField]="profileForm.username" />
+              @if (getErrorMessage(profileForm.username); as msg) {
+                <small class="text-danger fw-semibold">{{ msg }}</small>
+              }
+            </div>
+            <div class="col-md-6">
+              <label class="form-label fw-semibold">Correo</label>
+              <input type="email" class="form-control" [formField]="profileForm.email" />
+              @if (getErrorMessage(profileForm.email); as msg) {
+                <small class="text-danger fw-semibold">{{ msg }}</small>
+              }
+            </div>
+            <div class="col-md-6">
+              <label class="form-label fw-semibold">Nueva contraseña (opcional)</label>
+              <input type="password" class="form-control" [formField]="profileForm.password" placeholder="Dejar vacío para mantener la actual" />
+            </div>
+          </div>
+
+          <div class="d-flex gap-2">
+            <button type="submit" class="btn btn-success rounded-pill px-4" [disabled]="profileForm().invalid() || isSaving()">
+              {{ isSaving() ? 'Guardando...' : 'Guardar cambios' }}
+            </button>
+            <button type="button" class="btn btn-light rounded-pill px-4" (click)="cancelEditing()">Cancelar</button>
+          </div>
+        </form>
+      }
+    </div>
+  </div>
+} @else {
+  <div class="container-fluid py-4 px-4 w-100">
+    <div class="alert alert-danger">
+      {{ errorMessage() || 'No se pudieron cargar los datos del perfil.' }}
+    </div>
+  </div>
+}
